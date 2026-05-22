@@ -1,0 +1,15 @@
+# Source files — only dist/ is published
+src/
+
+# Dev config
+tsconfig.json
+tsup.config.ts
+vitest.config.ts
+
+# Build cache
+.turbo/
+*.tsbuildinfo
+
+# Misc
+.env
+.env.*

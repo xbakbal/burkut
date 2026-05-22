@@ -1,0 +1,60 @@
+{
+  "name": "@burkut/mcp",
+  "version": "0.1.0-beta.1",
+  "description": "MCP server for spec-driven development — agent-agnostic spec planning and tracking",
+  "type": "module",
+  "bin": {
+    "burkut-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/xbakbal/burkut#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xbakbal/burkut.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/xbakbal/burkut/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "spec-driven-development",
+    "sdd",
+    "claude",
+    "cursor",
+    "opencode",
+    "windsurf",
+    "copilot",
+    "gemini",
+    "ai",
+    "burkut"
+  ],
+  "scripts": {
+    "build": "tsup && chmod +x dist/index.js",
+    "dev": "tsup --watch",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@burkut/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.0",
+    "tsup": "^8.2.0",
+    "vitest": "^2.0.0"
+  }
+}

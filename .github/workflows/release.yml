@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+# Trusted Publishing requires id-token: write
+# No NPM_TOKEN secret needed — OIDC handles authentication
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  release:
+    name: Build, Test & Publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          # Trusted Publishing requires Node >= 22.14.0
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+          # Disable cache in release builds for reproducibility
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Publish to npm (Trusted Publishing)
+        run: pnpm -r publish --access public --no-git-checks
+        # No NODE_AUTH_TOKEN — Trusted Publishing uses OIDC automatically
