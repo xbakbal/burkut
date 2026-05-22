@@ -10,7 +10,7 @@ Burkut is an [MCP](https://modelcontextprotocol.io) server for structured spec-d
 
 It works with any MCP-compatible agent: Claude Code, Cursor, OpenCode, Windsurf, VS Code Copilot, Gemini CLI, and more.
 
-Named after **Burkut** — the sacred golden eagle of Turkic mythology, seeing the whole from above.
+Named after **Burkut** (Bürküt) — the divine eagle of Turkic and Altai mythology, perched atop the Tree of Life.
 
 ---
 
@@ -384,6 +384,14 @@ packages/
   core/   → @burkut/core  (spec model, markdown parser, validation, task dependency graph)
   mcp/    → @burkut/mcp   (MCP server exposing 6 spec tools via STDIO transport)
 ```
+
+---
+
+## About the name
+
+**Burkut** (Bürküt, meaning "eagle" in Old Turkic) is the divine eagle figure from Turkic and Altai mythology. Perched atop the 7th branch of the Tree of Life, Burkut is the emissary of the sky god Ülgen — its copper talons guard the gate between earth and heaven, its right wing veils the sun, and its left wing shelters the moon.
+
+In Sakha (Yakut) culture, the eagle is portrayed on top of the Tree of Earth as the symbol of Tengri. The name Burkut (also known as Merküt, Markut, Semrük) has been revered across Turkic, Altai, and Mongol traditions for millennia as the ultimate guardian spirit and the first teacher of shamans.
 
 ---
 

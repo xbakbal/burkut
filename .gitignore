@@ -5,3 +5,16 @@ coverage/
 *.tsbuildinfo
 .env
 .env.local
+
+# Internal planning docs (local only)
+PLAN.md
+PUBLISHING.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

@@ -4,7 +4,7 @@
 
 Burkut brings structured spec-driven development to any AI coding agent via the [Model Context Protocol](https://modelcontextprotocol.io). Rather than asking an agent to implement a feature directly, Burkut guides it through three planning phases — **requirements → design → tasks** — with human review between each step. The agent generates all spec content using its own intelligence; Burkut handles validation, file persistence, and state tracking.
 
-Named after **Burkut** — the sacred golden eagle of Turkic mythology, seeing the whole from above.
+Named after **Burkut** (Bürküt) — the divine eagle of Turkic and Altai mythology, perched atop the Tree of Life.
 
 ---
 
