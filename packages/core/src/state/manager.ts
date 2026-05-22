@@ -1,11 +1,3 @@
-/**
- * State manager for .specs/.state.json
- *
- * Responsible for reading/writing project-level state:
- *   - Which specs exist and their statuses
- *   - Which spec is currently active
- */
-
 import fs from "node:fs/promises"
 import path from "node:path"
 import type { ProjectState, SpecStatus } from "../types.js"
@@ -24,13 +16,12 @@ export class StateManager {
     this.stateFilePath = path.join(this.specsDir, STATE_FILE)
   }
 
-  /** Ensure .specs/ directory exists */
+  /** Ensure .specs/ directory structure exists and state file is initialized */
   async init(projectName?: string): Promise<void> {
     await fs.mkdir(this.specsDir, { recursive: true })
     await fs.mkdir(path.join(this.specsDir, "features"), { recursive: true })
 
-    const exists = await this.exists()
-    if (!exists) {
+    if (!(await this.exists())) {
       const initial: ProjectState = {
         version: STATE_VERSION,
         projectName,
@@ -52,8 +43,7 @@ export class StateManager {
 
   async read(): Promise<ProjectState> {
     const raw = await fs.readFile(this.stateFilePath, "utf-8")
-    const parsed = JSON.parse(raw) as unknown
-    return ProjectStateSchema.parse(parsed)
+    return ProjectStateSchema.parse(JSON.parse(raw) as unknown)
   }
 
   async write(state: ProjectState): Promise<void> {
@@ -73,28 +63,8 @@ export class StateManager {
 
   async addSpec(slug: string): Promise<void> {
     const state = await this.read()
-    if (!state.specs[slug]) {
-      state.specs[slug] = "draft"
-    }
-    if (!state.activeSpec) {
-      state.activeSpec = slug
-    }
-    await this.write(state)
-  }
-
-  async removeSpec(slug: string): Promise<void> {
-    const state = await this.read()
-    delete state.specs[slug]
-    if (state.activeSpec === slug) {
-      const remaining = Object.keys(state.specs)
-      state.activeSpec = remaining[0]
-    }
-    await this.write(state)
-  }
-
-  async setActiveSpec(slug: string): Promise<void> {
-    const state = await this.read()
-    state.activeSpec = slug
+    if (!state.specs[slug]) state.specs[slug] = "draft"
+    if (!state.activeSpec) state.activeSpec = slug
     await this.write(state)
   }
 
@@ -103,20 +73,7 @@ export class StateManager {
     return Object.entries(state.specs).map(([slug, status]) => ({ slug, status }))
   }
 
-  /** Resolve the spec slug to use — explicit arg or active spec */
-  async resolveSlug(slug?: string): Promise<string> {
-    if (slug) return slug
-
-    const state = await this.read()
-    if (!state.activeSpec) {
-      throw new Error(
-        "No active spec found. Run `burkut_spec_new to create one` to create one, or pass a spec name.",
-      )
-    }
-    return state.activeSpec
-  }
-
-  /** Absolute path to a spec's directory */
+  /** Absolute path to a spec's feature directory */
   specDir(slug: string): string {
     return path.join(this.specsDir, "features", slug)
   }

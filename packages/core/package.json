@@ -1,6 +1,6 @@
 {
   "name": "@burkut/core",
-  "version": "0.1.0-beta.6",
+  "version": "0.1.0-beta.7",
   "description": "Spec engine for Burkut - parse, validate, transform and manage specs",
   "type": "module",
   "main": "./dist/index.js",

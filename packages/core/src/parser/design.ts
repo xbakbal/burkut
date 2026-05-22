@@ -136,14 +136,18 @@ export function parseDesign(markdown: string): Design {
     components.push({ name: currentComponent.name, description: currentComponent.lines.join("\n").trim() })
   }
 
-  return {
+  const result: import("../types.js").Design = {
     overview: overview.join("\n").trim(),
     components,
-    dataFlow: dataFlow.join("\n").trim() || undefined,
-    sequenceDiagram: sequence.join("\n").trim() || undefined,
     technicalDecisions: decisions,
-    testingStrategy: testing.join("\n").trim() || undefined,
   }
+  const df = dataFlow.join("\n").trim()
+  if (df) result.dataFlow = df
+  const sq = sequence.join("\n").trim()
+  if (sq) result.sequenceDiagram = sq
+  const ts = testing.join("\n").trim()
+  if (ts) result.testingStrategy = ts
+  return result
 }
 
 // ─── Serializer ──────────────────────────────────────────────────────────────
