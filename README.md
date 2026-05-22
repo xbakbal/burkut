@@ -188,6 +188,8 @@ Other EARS patterns:
 
 ### `design.md` — Technical architecture
 
+The design document captures the technical approach before any code is written. It should include an overview, the main components and their responsibilities, a sequence diagram showing the key flow, and a **Technical Decisions** section listing the important architectural choices and the rationale behind them.
+
 ```markdown
 ## Overview
 JWT-based authentication using bcrypt for password hashing
